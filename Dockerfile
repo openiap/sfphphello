@@ -6,4 +6,4 @@ COPY . /app
 WORKDIR /app
 RUN composer install --no-dev --optimize-autoloader
 EXPOSE 3000
-ENTRYPOINT ["php", "-S", "0.0.0.0:3000", "index.php"]
+ENTRYPOINT ["php", "/app/index.php"]
