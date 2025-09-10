@@ -1,0 +1,21 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "php",
+            "request": "launch",
+            "name": "Run main",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "console": "integratedTerminal",
+            "program": "${workspaceFolder}/main.php",
+            "envFile": "${workspaceFolder}/.env",
+            "resolveSourceMapLocations": [
+                "${workspaceFolder}/**",
+                "!**/node_modules/**",
+                "**/node_modules/@openiap/**"
+            ]
+        }
+    ]
+}

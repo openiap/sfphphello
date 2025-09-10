@@ -1,0 +1,59 @@
+<?php
+#!/usr/bin/env php
+
+echo "Script start\n";
+
+// Function to send CORS headers
+function sendCorsHeaders() {
+    header("Access-Control-Allow-Origin: *");
+    header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
+    header("Access-Control-Allow-Headers: Content-Type");
+}
+
+// Function to handle requests
+function handleRequest() {
+    $method = $_SERVER['REQUEST_METHOD'];
+    $path = $_SERVER['REQUEST_URI'];
+    $clientIp = $_SERVER['REMOTE_ADDR'] ?? 'unknown';
+    
+    echo "Request received: $method $path from $clientIp\n";
+    
+    if ($method === 'OPTIONS') {
+        http_response_code(200);
+        sendCorsHeaders();
+        return;
+    }
+    
+    $dt = new DateTime();
+    $version = $_ENV['SF_TAG'] ?? 'latest';
+    
+    $responseData = [
+        'message' => 'Hello from PHP',
+        'dt' => $dt->format('c'), // ISO 8601 format
+        'version' => $version
+    ];
+    
+    http_response_code(200);
+    header('Content-Type: application/json');
+    sendCorsHeaders();
+    
+    echo json_encode($responseData);
+}
+
+$host = '0.0.0.0';
+$port = 3000;
+
+echo "Server created\n";
+
+// Start the built-in PHP server
+echo "Server listening callback\n";
+echo "Server running on $host:$port\n";
+
+// Create a simple router for the built-in server
+if (php_sapi_name() === 'cli-server') {
+    handleRequest();
+} else {
+    // If not using built-in server, we need to use a different approach
+    // This would typically be handled by a web server like Apache or Nginx
+    handleRequest();
+}
