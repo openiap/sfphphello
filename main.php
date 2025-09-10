@@ -1,13 +1,7 @@
 <?php
 #!/usr/bin/env php
 
-// Only output debug info if running from CLI and not handling web requests
-$isCliMode = php_sapi_name() === 'cli';
-$isWebRequest = isset($_SERVER['REQUEST_METHOD']);
-
-if ($isCliMode && !$isWebRequest) {
-    echo "Script start\n";
-}
+echo "Script start\n";
 
 // Function to send CORS headers
 function sendCorsHeaders() {
@@ -20,16 +14,12 @@ function sendCorsHeaders() {
 
 // Function to handle requests
 function handleRequest() {
-    global $isCliMode, $isWebRequest;
-    
     // Check if we have the required server variables
     $method = $_SERVER['REQUEST_METHOD'] ?? 'GET';
     $path = $_SERVER['REQUEST_URI'] ?? '/';
     $clientIp = $_SERVER['REMOTE_ADDR'] ?? 'unknown';
     
-    if ($isCliMode && !$isWebRequest) {
-        echo "Request received: $method $path from $clientIp\n";
-    }
+    echo "Request received: $method $path from $clientIp\n";
     
     if ($method === 'OPTIONS') {
         if (!headers_sent()) {
@@ -60,11 +50,9 @@ function handleRequest() {
 $host = '0.0.0.0';
 $port = 3000;
 
-if ($isCliMode && !$isWebRequest) {
-    echo "Server created\n";
-    echo "Server listening callback\n";
-    echo "Server running on $host:$port\n";
-}
+echo "Server created\n";
+echo "Server listening callback\n";
+echo "Server running on $host:$port\n";
 
 // Create a simple router for the built-in server
 if (php_sapi_name() === 'cli-server') {
