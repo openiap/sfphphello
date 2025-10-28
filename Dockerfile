@@ -1,4 +1,4 @@
-FROM php:latest
+FROM php83:latest
 LABEL anonymous="true"
 LABEL name="sfphphello"
 LABEL description="PHP serverless hello world function"
