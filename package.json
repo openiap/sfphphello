@@ -2,7 +2,7 @@
     "name": "sfphphello",
     "version": "0.0.1",
     "description": "PHP serverless hello world function",
-    "main": "main.php",
+    "main": "public/index.php",
     "author": "OpenIAP ApS / Allan Zimmermann",
     "license": "MPL-2.0",
     "openiap": {

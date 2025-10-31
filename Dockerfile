@@ -1,9 +1,8 @@
 FROM php83:latest
 LABEL anonymous="true"
-LABEL name="sfphphello"
-LABEL description="PHP serverless hello world function"
-COPY . /app
-WORKDIR /app
-RUN composer install --no-dev --optimize-autoloader
+LABEL repo="sfphphello"
+
+COPY . .
+RUN composer install
 EXPOSE 3000
-ENTRYPOINT ["php", "/app/main.php"]
+ENTRYPOINT ["php", "-S", "0.0.0.0:3000", "-t", "public"]

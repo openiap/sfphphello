@@ -1,6 +1,0 @@
-name: 
-channels:
-    - conda-forge
-dependencies:
-    - php
-    - composer
